@@ -1,0 +1,9 @@
+/.idea
+/build
+/vendor
+/composer.lock
+composer.phar
+php-scoper.phar
+php-scoper.phar.pubkey
+.php_cs.cache
+.phpunit.result.cache

@@ -1,0 +1,35 @@
+{
+    "name": "mijnpartnergroep-nl/sidn-suggestion-api-php",
+    "description": "SIDN Suggestion API client library for PHP. SIDN is the registrar for .nl fqdn's.",
+    "keywords": [
+        "sidn",
+        "suggestion",
+        "api",
+        "SIDN",
+        ".nl"
+    ],
+    "homepage": "https://www.mijnpartnergroep.nl/",
+    "license": "BSD-2-Clause",
+    "authors": [
+        {
+            "name": "MijnPartnerGroep.nl",
+            "email": "info@mijnpartgnergroep.nl"
+        }
+    ],
+    "require": {
+        "php": ">=5.6",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "ext-openssl": "*",
+        "composer/ca-bundle": "^1.1",
+        "guzzlehttp/guzzle": "^6.3 || ^7.0"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "Sidn\\Suggestion\\Api\\": "src/"
+        }
+    }
+}
