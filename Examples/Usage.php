@@ -1,7 +1,7 @@
 <?php
 include("vendor\autoload.php");
 
-use Sidn\Suggestion\Api\Exceptions\ApiException;
+use \Sidn\Suggestion\Api\Exceptions\ApiException;
 use  \Sidn\Suggestion\Api\SidnSuggestionApiClient;
 
 try {
@@ -13,7 +13,7 @@ try {
     $sidnApi->setAccessToken($auth->access_token);
 
     // Search for domain suggestions
-    $suggestions = $sidnApi->suggestion->Search("bike", 1000);
+    $suggestions = $sidnApi->suggestion->Search("bike.nl", 1000);
     print_r($suggestions->suggestions);
 
     // Optionally, query the used configuration from the results
