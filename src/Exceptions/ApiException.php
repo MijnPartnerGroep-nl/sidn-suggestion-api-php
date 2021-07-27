@@ -5,20 +5,25 @@ namespace Sidn\Suggestion\Api\Exceptions;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
+/**
+ * Resources: ApiException
+ */
 class ApiException extends \Exception
 {
 
     /**
-     * @var \Psr\Http\Message\RequestInterface|null
+     * @var \Psr\Http\Message\RequestInterface|null Request that threw the exception
      */
     protected $request;
 
     /**
-     * @var \Psr\Http\Message\ResponseInterface|null
+     * @var \Psr\Http\Message\ResponseInterface|null Response that threw the exception
      */
     protected $response;
 
     /**
+     * ApiException
+     * 
      * @param string $message
      * @param int $code
      * @param string|null $path

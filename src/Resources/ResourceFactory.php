@@ -2,6 +2,9 @@
 
 namespace Sidn\Suggestion\Api\Resources;
 
+/**
+ * Resources: ResourceFactory
+ */
 class ResourceFactory {
     /**
      * Create resource object from Api result

@@ -13,6 +13,9 @@ use Sidn\Suggestion\Api\Exceptions\ApiException;
 use Sidn\Suggestion\Api\Endpoints\AuthenticateEndpoint;
 use Sidn\Suggestion\Api\Endpoints\SuggestionEndpoint;
 
+/**
+ * Client: SidnSuggestionApiClient
+ */
 class SidnSuggestionApiClient
 {
     /**
@@ -27,7 +30,7 @@ class SidnSuggestionApiClient
     const CONNECT_TIMEOUT = 2;
 
     /**
-     * @var \GuzzleHttp\ClientInterface
+     * @var \GuzzleHttp\ClientInterface Guzzle's ClientInterface
      */
     protected $httpClient;
 
@@ -68,6 +71,8 @@ class SidnSuggestionApiClient
     public $suggestion;
 
     /**
+     * SidnSuggestionApiClient
+     * 
      * @param \GuzzleHttp\ClientInterface|null $httpClient Optionally define your own httpClient for testing purposes mostly
      * @throws \Sidn\Suggestion\Api\Exceptions\ApiException
      */
@@ -149,6 +154,8 @@ class SidnSuggestionApiClient
     }
 
     /**
+     * Use this method to set the Access Token. Reuse the access token as long as it is not expired. Reauthenticate after expiration.
+     * 
      * @param string $accessToken OAuth access token, in JWT format
      * 
      * @return \Sidn\Suggestion\Api\SidnSuggestionApiClient

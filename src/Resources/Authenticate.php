@@ -4,6 +4,9 @@ namespace Sidn\Suggestion\Api\Resources;
 
 use Sidn\Suggestion\Api\Exceptions\ApiException;
 
+/**
+ * Resources: Authenticate
+ */
 class Authenticate extends BaseResource {
     
     /**

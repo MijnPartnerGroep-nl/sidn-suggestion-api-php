@@ -4,7 +4,9 @@ namespace Sidn\Suggestion\Api\Endpoints;
 
 use Sidn\Suggestion\Api\Resources\Authenticate;
 
-
+/**
+ * Endpoints: AuthenticateEndpoint
+ */
 class AuthenticateEndpoint extends EndpointAbstract
 {
     /**
@@ -12,7 +14,7 @@ class AuthenticateEndpoint extends EndpointAbstract
      */
     protected $resourceEndpoint = "oauth/token";
     /**
-     * @var \Sidn\Suggestion\Api\Resources\Authenticate
+     * @var \Sidn\Suggestion\Api\Resources\Authenticate References the recource of the Authentication endpoint
      */
     protected $resourceClass = Authenticate::class;
 

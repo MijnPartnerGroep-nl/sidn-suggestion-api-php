@@ -4,6 +4,9 @@ namespace Sidn\Suggestion\Api\Resources;
 
 use Sidn\Suggestion\Api\Exceptions\ApiException;
 
+/**
+ * Resources: Suggestion
+ */
 class Suggestion extends BaseResource {
     
     /**

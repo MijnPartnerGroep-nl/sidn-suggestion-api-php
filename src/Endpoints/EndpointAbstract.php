@@ -5,19 +5,24 @@ namespace Sidn\Suggestion\Api\Endpoints;
 use Sidn\Suggestion\Api\SidnSuggestionApiClient;
 use Sidn\Suggestion\Api\Resources\ResourceFactory;
 
+/**
+ * Endpoints: EndpointAbstract
+ */
 abstract class EndpointAbstract
 {
     /**
-     * @var \Sidn\Suggestion\Api\SidnSuggestionApiClient
+     * @var \Sidn\Suggestion\Api\SidnSuggestionApiClient Client
      */
     protected $client;
 
     /**
-     * @var \Sidn\Suggestion\Api\Endpoints\AuthenticateEndpoint|\Sidn\Suggestion\Api\Endpoints\SuggestionEndpoint
+     * @var \Sidn\Suggestion\Api\Endpoints\AuthenticateEndpoint|\Sidn\Suggestion\Api\Endpoints\SuggestionEndpoint The endpoint used in the URL
      */
     protected $resourceEndpoint;
 
     /**
+     * EndpointAbstract
+     * 
      * @param \Sidn\Suggestion\Api\SidnSuggestionApiClient $api
      */
     public function __construct(SidnSuggestionApiClient $api)
@@ -28,7 +33,7 @@ abstract class EndpointAbstract
     /**
      * Send GET request to API using provided parameters
      * 
-     * @param array $params
+     * @param array $params Parameters to be used in the URL of the request
      * @return \Sidn\Suggestion\Api\Resources\Suggestion
      * @throws \Sidn\Suggestion\Api\Exceptions\ApiException
      */
@@ -44,8 +49,8 @@ abstract class EndpointAbstract
     /**
      * Send POST request using provided request body and optional headers
      * 
-     * @param array $body
-     * @param array $headers
+     * @param array $body Parameters to be used as the body of the request
+     * @param array $headers Optional headers to be send with the request
      * @return \Sidn\Suggestion\Api\Resources\Authenticate
      * @throws \Sidn\Suggestion\Api\Exceptions\ApiException
      */
@@ -64,8 +69,8 @@ abstract class EndpointAbstract
     /**
      * Create query string from provided array
      * 
-     * @param array $body
-     * @param array $headers
+     * @param array $params Parameters to be converted to a query string
+     * @param bool $get Optional, defaults to true assuming this is used for a GET request
      * @return \Sidn\Suggestion\Api\Resources\Authenticate
      * @throws \Sidn\Suggestion\Api\Exceptions\ApiException
      */

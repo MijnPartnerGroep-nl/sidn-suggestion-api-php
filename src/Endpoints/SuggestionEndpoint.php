@@ -4,7 +4,9 @@ namespace Sidn\Suggestion\Api\Endpoints;
 
 use Sidn\Suggestion\Api\Resources\Suggestion;
 
-
+/**
+ * Endpoints: SuggestionEndpoint
+ */
 class SuggestionEndpoint extends EndpointAbstract
 {
     /**
@@ -12,7 +14,7 @@ class SuggestionEndpoint extends EndpointAbstract
      */
     protected $resourceEndpoint = "suggestions";
     /**
-     * @var \Sidn\Suggestion\Api\Resources\Suggestion
+     * @var \Sidn\Suggestion\Api\Resources\Suggestion References the recource of the Suggestion endpoint
      */
     protected $resourceClass = Suggestion::class;
 
