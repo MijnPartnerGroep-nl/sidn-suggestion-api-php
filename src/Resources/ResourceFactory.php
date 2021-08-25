@@ -5,7 +5,8 @@ namespace Sidn\Suggestion\Api\Resources;
 /**
  * Resources: ResourceFactory
  */
-class ResourceFactory {
+class ResourceFactory
+{
     /**
      * Create resource object from Api result
      *
@@ -17,7 +18,7 @@ class ResourceFactory {
     public static function resourceFromResult($result, BaseResource $resource)
     {
         foreach ($result as $property => $value) {
-            if(in_array($property, $resource->expectedProperties)) {
+            if (in_array($property, $resource->expectedProperties)) {
                 $resource->{$property} = $value;
             }
         }

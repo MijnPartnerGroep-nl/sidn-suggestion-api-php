@@ -8,7 +8,6 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions as GuzzleRequestOptions;
-
 use Sidn\Suggestion\Api\Exceptions\ApiException;
 use Sidn\Suggestion\Api\Endpoints\AuthenticateEndpoint;
 use Sidn\Suggestion\Api\Endpoints\SuggestionEndpoint;
@@ -21,13 +20,13 @@ class SidnSuggestionApiClient
     /**
      * Endpoint of SIDN's Suggestion API
      */
-    const API_ENDPOINT = "https://suggestions.api.sidn.nl/";
+    private const API_ENDPOINT = "https://suggestions.api.sidn.nl/";
 
     /**
      * Default Timeout
      */
-    const TIMEOUT = 10;
-    const CONNECT_TIMEOUT = 2;
+    private const TIMEOUT = 10;
+    private const CONNECT_TIMEOUT = 2;
 
     /**
      * @var \GuzzleHttp\ClientInterface Guzzle's ClientInterface
@@ -37,7 +36,7 @@ class SidnSuggestionApiClient
     /**
      * @var string endPoint
      */
-    protected $apiEndpoint = SELF::API_ENDPOINT;
+    protected $apiEndpoint = self::API_ENDPOINT;
 
     /**
      * @var string accessToken
@@ -56,7 +55,7 @@ class SidnSuggestionApiClient
      * @var \Sidn\Suggestion\Api\Endpoints\SuggestionEndpoint
      */
     public $ep_suggestion;
-    
+
     /**
      * RESTful Authentication resource.
      *
@@ -72,8 +71,9 @@ class SidnSuggestionApiClient
 
     /**
      * SidnSuggestionApiClient
-     * 
-     * @param \GuzzleHttp\ClientInterface|null $httpClient Optionally define your own httpClient for testing purposes mostly
+     *
+     * @param \GuzzleHttp\ClientInterface|null $httpClient Optionally define your own
+     * httpClient for testing purposes mostly
      * @throws \Sidn\Suggestion\Api\Exceptions\ApiException
      */
     public function __construct(ClientInterface $httpClient = null)
@@ -96,30 +96,30 @@ class SidnSuggestionApiClient
 
     /**
      * Send and HTTP Request. This method is used by the resource specific classes.
-     * 
+     *
      * @param string $httpMethod
      * @param string $url
      * @param string|null $httpBody
      * @param array|null $httpHeaders
-     * 
+     *
      * @return \stdClass|null
      * @throws \Sidn\Suggestion\Api\Exceptions\ApiException
      */
     public function sendHttpRequest($httpMethod, $url, $httpBody = null, array $httpHeaders = null)
     {
         $url = $this->apiEndpoint . $url;
-        
+
         $userAgent = "MijnPartnerGroep-nl/SidnSuggestionApiClient";
 
         $headers = [
             'Accept' => $httpMethod == "application/json",
             'User-Agent' => $userAgent,
         ];
-        if(is_array($httpHeaders) && count($httpHeaders) > 0) {
+        if (is_array($httpHeaders) && count($httpHeaders) > 0) {
             $headers = array_merge($headers, $httpHeaders);
         }
-        if($this->accessToken != null) {
-            $headers["Authorization"] = "Bearer ".$this->accessToken;
+        if ($this->accessToken != null) {
+            $headers["Authorization"] = "Bearer " . $this->accessToken;
         }
 
         $request = new Request($httpMethod, $url, $headers, $httpBody);
@@ -130,12 +130,16 @@ class SidnSuggestionApiClient
             throw ApiException::createFromGuzzleException($e, $request);
         }
 
-        
+
         if (!$response) {
             throw new ApiException("No API response received.", 0, null, $request);
         } else {
             if ($response->getStatusCode() == 401) {
-                throw ApiException::createFromString("Authentication failed. Check your access token", $response, $request);
+                throw ApiException::createFromString(
+                    "Authentication failed. Check your access token",
+                    $response,
+                    $request
+                );
             }
             if ($response->getStatusCode() >= 400) {
                 throw ApiException::createFromResponse($response, $request);
@@ -144,7 +148,7 @@ class SidnSuggestionApiClient
             $result = (string)$response->getBody();
 
             $object = json_decode($result, true);
-    
+
             if (json_last_error() !== JSON_ERROR_NONE) {
                 throw new ApiException("Incorrect json response: '{$result}'.");
             }
@@ -154,10 +158,11 @@ class SidnSuggestionApiClient
     }
 
     /**
-     * Use this method to set the Access Token. Reuse the access token as long as it is not expired. Reauthenticate after expiration.
-     * 
+     * Use this method to set the Access Token. Reuse the access token as long as it is
+     * not expired. Reauthenticate after expiration.
+     *
      * @param string $accessToken OAuth access token, in JWT format
-     * 
+     *
      * @return \Sidn\Suggestion\Api\SidnSuggestionApiClient
      */
     public function setAccessToken($accessToken)
@@ -167,4 +172,3 @@ class SidnSuggestionApiClient
         return $this;
     }
 }
-

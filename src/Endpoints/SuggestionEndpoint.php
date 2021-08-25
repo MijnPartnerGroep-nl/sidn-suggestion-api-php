@@ -20,10 +20,11 @@ class SuggestionEndpoint extends EndpointAbstract
 
     /**
      * Initiate instance of endpoint object
-     * 
+     *
      * @return \Sidn\Suggestion\Api\Resources\Suggestion
      */
-    public function initiate() {
+    public function initiate()
+    {
         return $this->getResourceObject();
     }
 

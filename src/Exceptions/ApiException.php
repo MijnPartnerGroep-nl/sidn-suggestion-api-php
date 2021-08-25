@@ -23,7 +23,7 @@ class ApiException extends \Exception
 
     /**
      * ApiException
-     * 
+     *
      * @param string $message
      * @param int $code
      * @param string|null $path
@@ -32,8 +32,14 @@ class ApiException extends \Exception
      * @param \Throwable|null $previous
      * @throws \Sidn\Suggestion\Api\Exceptions\ApiException
      */
-    public function __construct($message = "", $code = 0, $path = null, RequestInterface $request = null, ResponseInterface $response = null, $previous = null)
-    {
+    public function __construct(
+        $message = "",
+        $code = 0,
+        $path = null,
+        RequestInterface $request = null,
+        ResponseInterface $response = null,
+        $previous = null
+    ) {
         $timestamp = date("Y-m-dTH:i:s");
 
         if (!empty($response)) {
@@ -64,15 +70,18 @@ class ApiException extends \Exception
 
     /**
      * Create Exception based on GuzzleException for initialization issues
-     * 
+     *
      * @param \GuzzleHttp\Exception\GuzzleException $guzzleException
      * @param \Psr\Http\Message\RequestInterface|null $request
      * @param \Throwable|null $previous
      * @return \Sidn\Suggestion\Api\Exceptions\ApiException
      * @throws \Sidn\Suggestion\Api\Exceptions\ApiException
      */
-    public static function createFromGuzzleException(\GuzzleHttp\Exception\GuzzleException $guzzleException, $request = null, $previous = null)
-    {
+    public static function createFromGuzzleException(
+        \GuzzleHttp\Exception\GuzzleException $guzzleException,
+        $request = null,
+        $previous = null
+    ) {
         if (method_exists($guzzleException, 'hasResponse') && method_exists($guzzleException, 'getResponse')) {
             if ($guzzleException->hasResponse()) {
                 return static::createFromResponse($guzzleException->getResponse(), $request, $previous);
@@ -84,15 +93,18 @@ class ApiException extends \Exception
 
     /**
      * Create Exception based on response payload
-     * 
+     *
      * @param \Psr\Http\Message\ResponseInterface $response
      * @param \Psr\Http\Message\RequestInterface|null $request
      * @param \Throwable|null $previous
      * @return \Sidn\Suggestion\Api\Exceptions\ApiException
      * @throws \Sidn\Suggestion\Api\Exceptions\ApiException
      */
-    public static function createFromResponse(ResponseInterface $response, RequestInterface $request = null, $previous = null)
-    {
+    public static function createFromResponse(
+        ResponseInterface $response,
+        RequestInterface $request = null,
+        $previous = null
+    ) {
         $object = static::parseResponseBody($response);
 
         return new self(
@@ -107,7 +119,7 @@ class ApiException extends \Exception
 
     /**
      * Create Exception mesage from string, for edge cases
-     * 
+     *
      * @param string $message
      * @param \Psr\Http\Message\ResponseInterface $response
      * @param \Psr\Http\Message\RequestInterface|null $request
@@ -115,8 +127,13 @@ class ApiException extends \Exception
      * @return \Sidn\Suggestion\Api\Exceptions\ApiException
      * @throws \Sidn\Suggestion\Api\Exceptions\ApiException
      */
-    public static function createFromString(string $message, ResponseInterface $response, RequestInterface $request = null, $previous = null) {
-        
+    public static function createFromString(
+        string $message,
+        ResponseInterface $response,
+        RequestInterface $request = null,
+        $previous = null
+    ) {
+
         return new self(
             "Error executing API call: {$message}",
             $response->getStatusCode(),
@@ -129,13 +146,14 @@ class ApiException extends \Exception
 
      /**
      * Parse repsonse payload
-     * 
+     *
      * @param \Psr\Http\Message\ResponseInterface $response
      * @return \stdClass|null
      * @throws \Sidn\Suggestion\Api\Exceptions\ApiException
      */
-    protected static function parseResponseBody($response)
-    {
+    protected static function parseResponseBody(
+        $response
+    ) {
         $body = (string) $response->getBody();
 
         $object = json_decode($body);

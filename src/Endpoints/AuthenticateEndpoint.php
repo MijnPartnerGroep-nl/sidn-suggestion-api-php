@@ -20,10 +20,11 @@ class AuthenticateEndpoint extends EndpointAbstract
 
     /**
      * Initiate instance of endpoint object
-     * 
+     *
      * @return \Sidn\Suggestion\Api\Resources\Authenticate
      */
-    public function initiate() {
+    public function initiate()
+    {
         return $this->getResourceObject();
     }
 

@@ -16,8 +16,8 @@ abstract class BaseResource
 
     /**
      * BaseResource
-     * 
-     * @param \Sidn\Suggestion\Api\SidnSuggestionApiClient $client 
+     *
+     * @param \Sidn\Suggestion\Api\SidnSuggestionApiClient $client
      * @return void
      */
     public function __construct(SidnSuggestionApiClient $client)

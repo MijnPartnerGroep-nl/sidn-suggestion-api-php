@@ -13,7 +13,9 @@
     "authors": [
         {
             "name": "MijnPartnerGroep.nl",
-            "email": "info@mijnpartgnergroep.nl"
+            "email": "info@mijnpartgnergroep.nl",
+            "homepage": "https:\/\/www.mijnpartnergroep.nl\/",
+            "role": "Developer"
         }
     ],
     "require": {
