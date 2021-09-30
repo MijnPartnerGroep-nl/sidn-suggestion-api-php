@@ -32,7 +32,7 @@ class Authenticate extends BaseResource
      *
      * @var array
      */
-    public $expectedProperties = array("access_token", "token_type", "expires_in", "scope", "jti");
+    public $expectedProperties = ["access_token", "token_type", "expires_in", "scope", "jti"];
 
     /**
      * This API uses the Client Authorization flow for server-side authorization. To start the authorization flow,
@@ -49,13 +49,13 @@ class Authenticate extends BaseResource
             throw new ApiException("Both client_id and client_secret are required!");
         }
 
-        $result = $this->client->ep_authenticate->post(array(
+        $result = $this->client->ep_authenticate->post([
             "grant_type" => $grant_type,
             "scope" => $scope
-        ), array(
+        ], [
             "Authorization" => "Basic " . base64_encode($client_id . ":" . $client_secret)
-        ));
+        ]);
 
-        return ResourceFactory::resourceFromResult($result, new Authenticate($this->client));
+        return ResourceFactory::resourceFromResult($result, new static($this->client));
     }
 }

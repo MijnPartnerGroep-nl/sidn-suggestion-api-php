@@ -16,7 +16,7 @@ abstract class EndpointAbstract
     protected $client;
 
     /**
-     * @var \Sidn\Suggestion\Api\Endpoints\AuthenticateEndpoint|\Sidn\Suggestion\Api\Endpoints\SuggestionEndpoint
+     * @var string
      * The endpoint used in the URL
      */
     protected $resourceEndpoint;
@@ -35,7 +35,7 @@ abstract class EndpointAbstract
      * Send GET request to API using provided parameters
      *
      * @param array $params Parameters to be used in the URL of the request
-     * @return \Sidn\Suggestion\Api\Resources\Suggestion
+     * @return \Sidn\Suggestion\Api\Resources\BaseResource
      * @throws \Sidn\Suggestion\Api\Exceptions\ApiException
      */
     public function get(array $params)
@@ -52,17 +52,17 @@ abstract class EndpointAbstract
      *
      * @param array $body Parameters to be used as the body of the request
      * @param array $headers Optional headers to be send with the request
-     * @return \Sidn\Suggestion\Api\Resources\Authenticate
+     * @return \Sidn\Suggestion\Api\Resources\BaseResource
      * @throws \Sidn\Suggestion\Api\Exceptions\ApiException
      */
-    public function post(array $body, array $headers = array())
+    public function post(array $body, array $headers = [])
     {
-        $headers = array_merge($headers, array("Content-Type" => "application/x-www-form-urlencoded"));
+        $headers = array_merge($headers, ["Content-Type" => "application/x-www-form-urlencoded"]);
         $result = $this->client->sendHttpRequest(
             "POST",
             $this->resourceEndpoint,
             count($body) > 0 ? $this->createQueryString($body, false) : null,
-            count($headers) > 0 ? $headers : null
+            $headers
         );
         return ResourceFactory::resourceFromResult($result, $this->getResourceObject());
     }
@@ -72,18 +72,18 @@ abstract class EndpointAbstract
      *
      * @param array $params Parameters to be converted to a query string
      * @param bool $get Optional, defaults to true assuming this is used for a GET request
-     * @return \Sidn\Suggestion\Api\Resources\Authenticate
+     * @return string
      * @throws \Sidn\Suggestion\Api\Exceptions\ApiException
      */
     protected function createQueryString(array $params, bool $get = true)
     {
-        return count($params) > 0 ? ($get ? "?" : "") . http_build_query($params, "", "&") : "";
+        return count($params) > 0 ? ($get ? "?" : "") . http_build_query($params) : "";
     }
 
     /**
      * Get the object that is used by this API endpoint.
      *
-     * @return \Sidn\Suggestion\Api\Resources\Authenticate|\Sidn\Suggestion\Api\Resources\Suggestion
+     * @return \Sidn\Suggestion\Api\Resources\BaseResource
      */
     abstract protected function getResourceObject();
 }

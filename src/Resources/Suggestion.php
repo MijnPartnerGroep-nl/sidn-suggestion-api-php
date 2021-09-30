@@ -15,11 +15,11 @@ class Suggestion extends BaseResource
      */
     public $original;
     /**
-     * @var Array Array of configurations used to determine the provided suggestions
+     * @var array Array of configurations used to determine the provided suggestions
      */
     public $config;
     /**
-     * @var Array Array with suggestions based on the domain
+     * @var array Array with suggestions based on the domain
      */
     public $suggestions;
 
@@ -28,7 +28,7 @@ class Suggestion extends BaseResource
      *
      * @var array
      */
-    public $expectedProperties = array("original", "config", "suggestions");
+    public $expectedProperties = ["original", "config", "suggestions"];
 
     /**
      * Searching for a domain will return relevant and available domain name suggestions.
@@ -44,11 +44,11 @@ class Suggestion extends BaseResource
             throw new ApiException("A domain is required for this method!");
         }
 
-        $result = $this->client->ep_suggestion->get(array(
+        $result = $this->client->ep_suggestion->get([
             "domain" => $domain,
             "limit" => $limit
-        ));
+        ]);
 
-        return ResourceFactory::resourceFromResult($result, new Suggestion($this->client));
+        return ResourceFactory::resourceFromResult($result, new static($this->client));
     }
 }
