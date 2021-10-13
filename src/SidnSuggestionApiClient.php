@@ -105,20 +105,19 @@ class SidnSuggestionApiClient
      * @return \stdClass|null
      * @throws \Sidn\Suggestion\Api\Exceptions\ApiException
      */
-    public function sendHttpRequest($httpMethod, $url, $httpBody = null, array $httpHeaders = null)
+    public function sendHttpRequest($httpMethod, $url, $httpBody = null, array $httpHeaders = [])
     {
         $url = $this->apiEndpoint . $url;
 
         $userAgent = "MijnPartnerGroep-nl/SidnSuggestionApiClient";
 
         $headers = [
-            'Accept' => $httpMethod == "application/json",
+            'Accept' => "application/json",
             'User-Agent' => $userAgent,
         ];
-        if (is_array($httpHeaders) && count($httpHeaders) > 0) {
-            $headers = array_merge($headers, $httpHeaders);
-        }
-        if ($this->accessToken != null) {
+        $headers = array_merge($headers, $httpHeaders);
+        
+        if ($this->accessToken !== null) {
             $headers["Authorization"] = "Bearer " . $this->accessToken;
         }
 
@@ -134,7 +133,7 @@ class SidnSuggestionApiClient
         if (!$response) {
             throw new ApiException("No API response received.", 0, null, $request);
         } else {
-            if ($response->getStatusCode() == 401) {
+            if ($response->getStatusCode() === 401) {
                 throw ApiException::createFromString(
                     "Authentication failed. Check your access token",
                     $response,

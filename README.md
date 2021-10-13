@@ -2,8 +2,10 @@
 PHP client for SIDN suggestion API
 
 ## Requirements and Authorization ##
-To use the API you must request access by sending a request to support@sidn.nl or contacting your SIDN representative. When approved 
-you will be provided with access to the API. The API uses the Client Authorization flow for server-side authorization. To start the authorization flow, you need to request a clientId and clientSecret. You can request these from SIDN Support. 
+To use the API you must request access by sending a request to support@sidn.nl or contacting your 
+SIDN representative. When approved you will be provided with access to the API. The API uses the 
+Client Authorization flow for server-side authorization. To start the authorization flow, you need 
+to request a clientId and clientSecret. You can request these from SIDN Support. 
 
 ## Installation ##
 The easiest way to install this client is to require it using [Composer](http://getcomposer.org/doc/00-intro.md).
