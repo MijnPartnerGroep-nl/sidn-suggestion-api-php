@@ -22,6 +22,11 @@ class ApiException extends \Exception
     protected $response;
 
     /**
+     * @var string Timestamp returned by the api, or if response empty, the current timestamp
+     */
+    public $timestamp;
+
+    /**
      * ApiException
      *
      * @param string $message
@@ -50,7 +55,7 @@ class ApiException extends \Exception
                 $timestamp = $object->timestamp;
             }
         }
-        $message = "[{$timestamp}] " . $message;
+        $this->timestamp = $timestamp;
 
         if (!is_null($path)) {
             $message .= "\r\n" . $path;
@@ -61,7 +66,7 @@ class ApiException extends \Exception
             $requestBody = $request->getBody()->__toString();
 
             if ($requestBody) {
-                $message .= ". Request body: {$requestBody}";
+                $message .= "\r\nRequest body: {$requestBody}\r\n";
             }
         }
 
