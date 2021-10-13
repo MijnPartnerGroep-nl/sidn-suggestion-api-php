@@ -48,7 +48,7 @@ try {
     // Optionally, query the used domain (cleaned) from the results
     print_r($suggestions->original);
 } catch (ApiException $ae) {
-    echo "Error occured at: ".$ae->timestamp . ";<br />Message: ".$ae->getMessage();
+    echo "Error occured at: ".$ae->getTimestamp() . ";<br />Message: ".$ae->getMessage();
     throw $ae;
 }
 ```` 

@@ -24,7 +24,7 @@ class ApiException extends \Exception
     /**
      * @var string Timestamp returned by the api, or if response empty, the current timestamp
      */
-    public $timestamp;
+    protected $timestamp;
 
     /**
      * ApiException
@@ -147,6 +147,15 @@ class ApiException extends \Exception
             null,
             $previous
         );
+    }
+
+    /**
+     * Get the Exception Timestamp
+     * 
+     * @return string 
+     */
+    public function getTimestamp() { 
+        return $this->timestamp;
     }
 
      /**
