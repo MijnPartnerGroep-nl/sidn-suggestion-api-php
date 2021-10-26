@@ -22,7 +22,7 @@ Or add to your composer.json:
 ```
 
 ## Example usage ##
-Example usage as found in [the examples folder](examples/usage.php).
+Example usage as found in [the examples folder](Examples/Usage.php).
 ```PHP
 <?php
 include("vendor\autoload.php");
